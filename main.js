@@ -1,10 +1,10 @@
-// fetch all the id's
+// fetching elements
 var form = document.getElementById("new-task-form");
 var input = document.getElementById("new-task-input");
 var tasks = document.getElementById("tasks");
 var taskCount = document.getElementById("task-count");
 
-// Add task to the list
+// Event listener for Form Submisssion
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -82,7 +82,7 @@ function createTask(text) {
 
   return task;
 }
-
+// this function updates the displayed task count
 function updateCount() {
   var count = tasks.getElementsByClassName("task").length;
   var editedCount = tasks.querySelectorAll('input[data-edited="true"]').length;  // Count edited tasks
