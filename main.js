@@ -1,8 +1,10 @@
+// fetch all the id's
 var form = document.getElementById("new-task-form");
 var input = document.getElementById("new-task-input");
 var tasks = document.getElementById("tasks");
 var taskCount = document.getElementById("task-count");
 
+// Add task to the list
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -14,10 +16,11 @@ form.addEventListener("submit", function (event) {
     tasks.appendChild(task);
     updateCount();
   } else {
-    alert("Please enter a task."); //show an alert if the the task is empty
+    alert("Please enter a task."); //show an alert if the task is empty
   }
 });
 
+// Create task  function
 function createTask(text) {
   var task = document.createElement("div");
   task.className = "task";
@@ -35,20 +38,36 @@ function createTask(text) {
   var actions = document.createElement("div");
   actions.className = "actions";
 
+  // Add Edit button to the task
+  var editButton = document.createElement("button");
+  editButton.innerText = "Edit";
+  editButton.className = "edit";
+  actions.appendChild(editButton);
+
   var checkbox = document.createElement("input");
   checkbox.type = "checkbox";
-  checkbox.className = "complete-check";
-  checkbox.addEventListener("click", function () {
-    if (checkbox.checked) {
-      task.classList.add("completed");
-      
+  checkbox.className = "edit";
+
+// Add functionality for edit button
+  editButton.addEventListener('click', (e) => {
+    const button = e.target;  
+    const taskInput = button.parentElement.parentElement.querySelector('.text');
+    
+    if (button.innerText.toLowerCase() === "edit") {
+        button.innerText = "Save";
+        taskInput.removeAttribute("readonly");
+        taskInput.focus();
     } else {
-      task.classList.remove("completed");
+        button.innerText = "Edit";
+        taskInput.setAttribute("readonly", "readonly");
+        taskInput.setAttribute('data-edited', 'true');  // Mark the task as edited
     }
     updateCount();
-  });
-  actions.appendChild(checkbox);
+});
 
+
+
+  //Add functionality for delete button
   var deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
   deleteButton.className = "delete";
@@ -66,11 +85,13 @@ function createTask(text) {
 
 function updateCount() {
   var count = tasks.getElementsByClassName("task").length;
-  var completedCount = tasks.getElementsByClassName("completed").length;
+  var editedCount = tasks.querySelectorAll('input[data-edited="true"]').length;  // Count edited tasks
+  
 
-  taskCount.innerText = count + " tasks, " + completedCount + " completed";
-
+  taskCount.innerText = count + " tasks, " + editedCount + " edited, ";
+  // if there is no task in the list
   if (count === 0) {
-    alert("All tasks have been deleted.");
+      alert("All tasks have been deleted.");
   }
 }
+

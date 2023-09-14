@@ -20,8 +20,10 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	color: #FFF;
-	background-color: var(--dark);
-}
+	background-image: url(https://images.pexels.com/photos/640781/pexels-photo-640781.jpeg?auto=compress&cs=tinysrgb&w=600);	
+	background-repeat: no-repeat;
+	background-size: cover;
+}	
 /* ............header.................... */
 
 
@@ -45,7 +47,7 @@ header {
 header h1{ 
 	font-size: 2.5rem;
 	font-weight: 300;
-	color: var(--grey);
+	color: var(--gray);
 	margin-bottom: 1rem;
 }
 
@@ -159,21 +161,15 @@ main {
 	opacity: 0.6;
 }
 
-.task .actions .complete-check{
-	height: 20px;
-	width: 20px;
-	background-color: green ;
-	border-radius: 50%;
-	cursor: pointer;
-	color: aqua;
-	
-}
-.task .complete-check:hover{
-	background-color: var(--purple);
+.task .actions .edit{
+	background-color: #8B5CF6;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
 }
 
 
-.task .actions .delete {
+.delete{
 	background-image: linear-gradient(to right, var(--pink), var(--purple));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -181,14 +177,16 @@ main {
 /* .........footer......... */
 
 footer{
-	position: relative;
+	position: fixed;
+	left: 40vw;
+	top: 95vh;
 }
 .footer-des{
 	display: flex;
 	position: relative;
 	align-items: center;
 	justify-content: center;
-	top: -5px;
+	top: -8px;
 	color: var(--purple);
 }
 .auther p{
